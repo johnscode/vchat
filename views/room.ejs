@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <% include ./head %>
+    <link rel='stylesheet' href='./stylesheets/styles-scss.css' />
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/webrtc.js"></script>
+  </head>
+  <body class="container">
+  <header class="nav-header">
+    <% include ./header %>
+  </header>
+<!--    <h1>< %= title % ></h1>-->
+    <h3>Welcome to <%= title %><smaller><%= name ? `, ${name}` : '' %></smaller></h3>
+  <div>
+    <main>
+      <div class="content-header main-intro">
+        <p>Main Feed</p>
+      </div>
+      <div class="row">
+        <div class="col-md-6 content">
+          <video id="localVideo" autoplay muted style="width:40%;"></video>
+<!--          <video id="remoteVideo" autoplay style="width:40%;"></video>-->
+        </div>
+        <div class="col-md-4 content">
+          <video id="remoteVideo" autoplay style="width:40%;"></video>
+        </div>
+        <div class="col-md-2 content">
+          <div class="container"><span id="roomName">---</span>
+            <div id="roomItems"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <input type="button" id="start" onclick="start(true)" value="Start Video"></input>
+        <input type="button" id="hangup" value="Hangup"></input>
+        <input type="button" id="join" value="join"></input>
+        <input type="button" id="send" value="send"></input>
+      </div>
+    </main>
+  </div>
+  </div>
+  <footer>
+    <% include ./footer %>
+  </footer>
+  </body>
+<script>
+  pageReady();
+  $(document).ready(function(){
+    $('#hangup').prop('disabled', true);
+    $('#hangup').on('click', function(elem) {
+      console.log("hangup")
+      hangup(elem);
+      $('#hangup').prop('disabled', true);
+    });
+    $('#join').on('click', function(elem) {
+      console.log("join")
+      joinRoom( "<%= room %>","<%= name %>")
+    });
+    $('#send').on('click', function(elem) {
+      console.log("send")
+      // sendMsg("yo yo")
+      sendChannelMessage('channel yo');
+    });
+  });
+</script>
+</html>

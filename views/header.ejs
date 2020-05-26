@@ -1,0 +1,27 @@
+<nav role="navigation">
+
+    <ul class="nav nav-bordered nav-block">
+        <li class="nav-header"><a class="navbar-brand" href="#">
+                <i class="fa fa-leaf" aria-hidden="true"></i>
+                verse
+            </a></li>
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+    </ul>
+    <ul class="nav nav-bordered nav-block-right">
+        <% console.log(`header.ejs - user ${(typeof name != 'undefined')?name:'user not def'}`)  %>
+        <li class="nav-item"><a id="logout-link" class="nav-link">Logout</a></li>
+        <li class="nav-item"><a class="nav-link" id="login-link">Signin</a></li>
+    </ul>
+    <script type='text/javascript' src="/js/logout.js"></script>
+    <script type='text/javascript' src="/js/login.js"></script>
+    <script type="text/javascript">
+      $('#logout-link').hide()
+      $('#login-link').hide()
+      $(document).ready(function(){
+        $('#logout-link').on('click', do_logout);
+        $('#login-link').on('click', do_login);
+      });
+
+    </script>
+</nav>
